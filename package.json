@@ -1,6 +1,6 @@
 {
   "name": "promptodon",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "promptodon is a bot to post daily journal/blog post prompts.",
   "main": "./src/app.js",
   "scripts": {
@@ -15,6 +15,6 @@
   "dependencies": {
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
-    "uuid": "^8.0.0"
+    "uuid": "^8.3.0"
   }
 }
