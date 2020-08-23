@@ -1,0 +1,20 @@
+{
+  "name": "promptodon",
+  "version": "0.0.1",
+  "description": "promptodon is a bot to post daily journal/blog post prompts.",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mastodon",
+    "bot"
+  ],
+  "author": "Brandon 'LinuxLiaison' Nolet",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "uuid": "^8.0.0"
+  }
+}

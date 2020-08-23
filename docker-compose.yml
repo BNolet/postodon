@@ -1,0 +1,8 @@
+version: '3'
+services:
+    promptodon:
+        container_name: 'promptodon'
+        image: bnolet/promptodon:latest
+        env_file:
+            - ./.env
+        restart: always
