@@ -13,7 +13,7 @@ async function replyWithPrompt() {
         }
     })
     try {
-        await toReply.map(function(status) {
+        await toReply.map(async function(status) {
             let toMention
             if (status.mentions) {
                 toMention = '@' + status.account.acct
@@ -22,7 +22,7 @@ async function replyWithPrompt() {
                 toMention = '@' + status.account.acct
             }
             console.log('replying')
-            mast.postStatus( toMention + ' ' + randomPrompt.getRandomPrompt(), 'reply', status.id)
+            mast.postStatus( toMention + ' ' + await randomPrompt.getRandomPrompt(), 'reply', status.id, status.visibility)
         })
         repliedTo = repliedTo.concat(toReply)
     } catch(err) {
@@ -31,7 +31,7 @@ async function replyWithPrompt() {
 }
 
 async function postPrompt() {
-    const post = await mast.postStatus(randomPrompt.getRandomPrompt(), 'post')
+    const post = await mast.postStatus((await randomPrompt.getRandomPrompt()), 'post')
     console.log('posting')
     return post
 }

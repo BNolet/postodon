@@ -53,7 +53,7 @@ module.exports =
         
     },
 
-    async postStatus(content, mode, replyToId) {
+    async postStatus(content, mode, replyToId, visibility) {
         if (mode !== 'reply') {
             try {
                 axios({
@@ -65,7 +65,7 @@ module.exports =
                     },
                     data: {
                         status: content,
-                        media_ids: []
+                        visibility: `${visibility}`
                     }
                 }).then(function(response){
                     return response
@@ -84,8 +84,8 @@ module.exports =
                     },
                     data: {
                         status: content,
-                        media_ids: [],
-                        in_reply_to_id: replyToId
+                        in_reply_to_id: replyToId,
+                        visibility: `${visibility}`
                     }
                 }).then(function(response){
                     return response

@@ -1,6 +1,6 @@
 {
   "name": "promptodon",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "promptodon is a bot to post daily journal/blog post prompts.",
   "main": "./src/app.js",
   "scripts": {
