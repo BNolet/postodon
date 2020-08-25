@@ -17,11 +17,10 @@ INSTANCE_URL is the url at which your bot account/application was created.
 
 Give the application the following *Scopes*:
 
-```
-- read:notifications
-- read:statuses
-- write:conversations
-- write:statuses
+```javascript
+- read:notifications //check if someone's asked for a prompt
+- write:statuses //post at all
+- write:notifications // clear notifications on start so replied-to posts aren't replied to again
 ```
 
 Run `npm install` and then `npm run start`

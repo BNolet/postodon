@@ -53,7 +53,7 @@ module.exports =
         
     },
 
-    async postStatus(content, mode, replyToId, visibility) {
+    async postStatus(content, mode, visibility, replyToId) {
         if (mode !== 'reply') {
             try {
                 axios({

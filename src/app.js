@@ -22,7 +22,7 @@ async function replyWithPrompt() {
                 toMention = '@' + status.account.acct
             }
             console.log('replying')
-            mast.postStatus( toMention + ' ' + await randomPrompt.getRandomPrompt(), 'reply', status.id, status.visibility)
+            mast.postStatus( toMention + ' ' + await randomPrompt.getRandomPrompt(), 'reply',status.visibility, status.id)
         })
         repliedTo = repliedTo.concat(toReply)
     } catch(err) {
@@ -31,11 +31,12 @@ async function replyWithPrompt() {
 }
 
 async function postPrompt() {
-    const post = await mast.postStatus((await randomPrompt.getRandomPrompt()), 'post')
+    const post = await mast.postStatus((await randomPrompt.getRandomPrompt()), 'post', 'public')
     console.log('posting')
     return post
 }
 
 let repliedTo = []
+postPrompt()
 setInterval(() => {replyWithPrompt()},5000)
 setInterval(() => {postPrompt()},86400000)
