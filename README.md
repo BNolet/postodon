@@ -1,3 +1,8 @@
+[![Build Status](https://drone.bnolet.me/api/badges/brandon/promptodon/status.svg)](https://drone.bnolet.me/brandon/promptodon)
+
+
+
+
 # promptodon
 
 promptodon is a blog post/journal entry prompt robot that encourages you to write daily.
