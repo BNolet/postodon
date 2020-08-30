@@ -8,7 +8,7 @@ async function replyWithPrompt() {
     const notifications = await mastoapi.getNotifications(5)
 
     let toReply = notifications.filter(function(status) {
-        if (status.content.includes('/prompt') && repliedTo.some(i => i.id.includes(status.id)) === false){
+        if (status.content.includes(' /prompt') && repliedTo.some(i => i.id.includes(status.id)) === false){
             return true
         }
     })
