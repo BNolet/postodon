@@ -2,7 +2,6 @@
 
 
 
-
 # promptodon
 
 promptodon is a blog post/journal entry prompt robot that encourages you to write daily.
@@ -23,7 +22,17 @@ Give the application the following *Scopes*:
 - write:notifications // clear notifications on start so replied-to posts aren't replied to again
 ```
 
+## Node/NPM
+
 Run `npm install` and then `npm run start`
+
+## Docker
+
+You can either start promptodon via docker directly or use the provided docker-compose file. 
+
+### Starting via Docker
+
+docker run --name promptodon bnolet/promptodon --env-file ./env
 
 # Author
 

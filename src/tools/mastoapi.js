@@ -94,5 +94,22 @@ module.exports =
                 throw err
             }
         }
-    } 
+    },
+    
+    async clearNotifications() {
+        try {
+            console.log(token)
+            axios({
+                method: 'post',
+                url: `https://${url}/api/v1/notifications/clear`,
+                headers: { 
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(function(response){
+                return response
+            })
+        } catch(err) {
+            throw err
+        }
+    }   
 }
