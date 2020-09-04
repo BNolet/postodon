@@ -1,0 +1,20 @@
+INCOMPLETE!!
+
+name: Build docker container
+author: BNolet
+
+description: This action will build the docker container for postodon and commit it to the bnolet/postodon docker repo
+
+on:
+  push:
+    branches: [ master ]
+  pull_request: [ master ]
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - users: actions/checkout@v2
+        - name: Build the Docker image
+          run 

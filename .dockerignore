@@ -2,5 +2,6 @@
 .gitignore
 node_modules
 .git
-LICENSE
 README.md
+docker-compose.yml
+docs

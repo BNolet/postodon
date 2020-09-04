@@ -1,38 +1,19 @@
-[![Build Status](https://drone.bnolet.me/api/badges/brandon/promptodon/status.svg)](https://drone.bnolet.me/brandon/promptodon)
-
-
 
 # promptodon
 
-promptodon is a blog post/journal entry prompt robot that encourages you to write daily.
+Postodon is a server that will post to mastodon at a given interval, with each post consisting of an intro and content. This project was forked from [promptodon](https://bitea.bnolet.me/brandon/promptodon) as I saw the use of a more general purpose interval-based posting bot. 
 
 # Usage
 
-Create a `.env` file in the directory you cloned this repository to containing the variables `ACCESS_TOKEN` and `INSTANCE_URL`.
+You can either run the bot raw using node or run it in a docker container using the provided docker-compose.yml file. If you find any issues with that file, feel free to open an issue.
 
-ACCESS_TOKEN can be found by creating an application at https://YOUR-INSTANCE.EXAMPLE/settings/applications and using the string in the *Your access token* field
+# The basics
 
-INSTANCE_URL is the url at which your bot account/application was created. 
+Postodon will post to a designated mastodon account on a daily basis by default. It does this by taking an intro (taken from a single line in the intros.txt file you provide) and a piece of content (taken from a single line in the content.txt file you provide) and concatenates the two together, separated by a single empty line, and sends a POST request to the designated server. The account on that server to which the access token belongs to will be the account you post to. You must create the access token beforehand or else your bot will not know which account to post to. 
 
-Give the application the following *Scopes*:
+# WARNING
 
-```javascript
-- read:notifications //check if someone's asked for a prompt
-- write:statuses //post at all
-- write:notifications // clear notifications on start so replied-to posts aren't replied to again
-```
-
-## Node/NPM
-
-Run `npm install` and then `npm run start`
-
-## Docker
-
-You can either start promptodon via docker directly or use the provided docker-compose file. 
-
-### Starting via Docker
-
-docker run --name promptodon bnolet/promptodon --env-file ./env
+This bot is being published as a work in progress and I am actively seeking feedback on various things such as error handling, clarity of documentation, and ease of use. Feel free to open an issue, contact me via [email](mailto:linuxliaison@fastmail.com), or via Mastodon [@brandon@fosstodon.org](https://fosstodon.org/@brandon). This bot has very little to no error handling at this point. The code is provided as is for the moment, but I will be taking feature requests. 
 
 # Author
 
@@ -40,4 +21,4 @@ This bot was (mostly) created by [linuxliaison](https://fosstodon.org/@brandon).
 
 # LICENSE
 
-This work was licensed under GPLv3. Check out the [LICENSE](LICENSE) file.
+This work is licensed under GPLv3. Check out the [LICENSE](LICENSE) file.

@@ -1,0 +1,2 @@
+This is an example toot! This bot was made by @brandon@fosstodon.org
+You can add more content by adding a new line of text

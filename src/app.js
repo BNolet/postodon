@@ -1,37 +1,40 @@
 require('dotenv').config()
-const randomPrompt = require('./tools/randomPrompt')
+const posts = require('./tools/posts')
 const mastoapi = require('./tools/mastoapi.js')
+const command = process.env.COMMAND || "/post"
+const interval = process.env.INTERVAL || 86400000
+const replyInterval = process.env.REPLY_INTERVAL || 5000
 
 console.log('✍️ promptodon is running!')
 
 async function replyWithPrompt() {
-    const notifications = await mastoapi.getNotifications(5)
+    const notifications = await mastoapi.getNotifications(5) // get the last five notifications
 
-    let toReply = notifications.filter(function(status) {
-        if (status.content.includes(' /prompt') && repliedTo.some(i => i.id.includes(status.id)) === false){
-            return true
+    let toReply = notifications.filter(function(status) { //Adds notification to be replied to if below is true
+        if (status.content.includes(` ${command}`) && repliedTo.some(i => i.id.includes(status.id)) === false){
+            return true // check if notification content contains the set command and has not been replied to
         }
     })
     try {
-        await toReply.map(async function(status) {
+        await toReply.map(async function(status) { // for each toReply status, execute below
             let toMention
-            if (status.mentions) {
+            if (status.mentions) { // Mention anyone
                 toMention = '@' + status.account.acct
-                toMention = toMention.concat(' ' + status.mentions.map(x => '@' + x.acct).join(" "))
+                toMention = toMention.concat(' ' + status.mentions.map(x => '@' + x.acct).join(" ")) // concatenate mentions with a space
             } else {
                 toMention = '@' + status.account.acct
             }
             console.log('replying')
-            mastoapi.postStatus( toMention + ' ' + await randomPrompt.getRandomPrompt(), 'reply',status.visibility, status.id)
+            mastoapi.postStatus( toMention + ' ' + await posts.getRandomPost(), 'reply',status.visibility, status.id) //reply with random post and mentions
         })
-        repliedTo = repliedTo.concat(toReply)
+        repliedTo = repliedTo.concat(toReply) // add status to list of already replied to statuses
     } catch(err) {
         throw err
     }
 }
 
-async function postPrompt() {
-    const post = await mastoapi.postStatus((await randomPrompt.getRandomPrompt()), 'post', 'public')
+async function postStatus() { // post a random post
+    const post = await mastoapi.postStatus((await posts.getRandomPost()), 'post', 'public')
     console.log('posting')
     return post
 }
@@ -39,5 +42,5 @@ async function postPrompt() {
 
 mastoapi.clearNotifications()
 let repliedTo = []
-setInterval(() => {replyWithPrompt()},5000)
-setInterval(() => {postPrompt()},86400000)
+setInterval(() => {replyWithPrompt()},replyInterval) //check for commands every 5 seconds
+setInterval(() => {postStatus()},interval) // post once a day

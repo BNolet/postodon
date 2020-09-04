@@ -1,8 +1,12 @@
 version: '3'
 services:
-    promptodon:
-        container_name: 'promptodon'
-        image: bnolet/promptodon:latest
+    postodon:
+        container_name: 'postodon'
+        image: bnolet/postodon:latest
         env_file:
             - ./.env
+        volumes:
+            -  ./src/intros.txt:/usr/src/intros.txt
+            -  ./src/content.txt:/usr/src/content.txt
+
         restart: always
