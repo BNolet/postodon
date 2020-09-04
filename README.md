@@ -5,7 +5,7 @@ Postodon is a server that will post to mastodon at a given interval, with each p
 
 # Usage
 
-You can either run the bot raw using node or run it in a docker container using the provided docker-compose.yml file. If you find any issues with that file, feel free to open an issue.
+You can either run the bot raw using node or run it in a docker container using the provided docker-compose.yml file. If you find any issues with that file, feel free to open an issue. See [HOWTO.md](docs/HOWTO.md) for more usage info.
 
 # The basics
 
