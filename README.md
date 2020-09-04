@@ -1,5 +1,5 @@
 
-# promptodon
+# postodon
 
 Postodon is a server that will post to mastodon at a given interval, with each post consisting of an intro and content. This project was forked from [promptodon](https://bitea.bnolet.me/brandon/promptodon) as I saw the use of a more general purpose interval-based posting bot. 
 
