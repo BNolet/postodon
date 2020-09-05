@@ -5,7 +5,7 @@ const command = process.env.COMMAND || "/post"
 const interval = process.env.INTERVAL || 86400000
 const replyInterval = process.env.REPLY_INTERVAL || 5000
 
-console.log('✍️ promptodon is running!')
+console.log('💬 postodon is running!')
 
 async function replyWithPrompt() {
     const notifications = await mastoapi.getNotifications(5) // get the last five notifications

@@ -1,7 +1,7 @@
 {
-  "name": "promptodon",
+  "name": "postodon",
   "version": "0.0.1",
-  "description": "promptodon is a bot to post daily journal/blog post prompts.",
+  "description": "postodon is a daily posting bot for Mastodon",
   "main": "./src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
