@@ -17,12 +17,9 @@ async function replyWithPrompt() {
     })
     try {
         await toReply.map(async function(status) { // for each toReply status, execute below
-            let toMention
+            let toMention = '@' + status.account.acct
             if (status.mentions) { // Mention anyone
-                toMention = '@' + status.account.acct
                 toMention = toMention.concat(' ' + status.mentions.map(x => '@' + x.acct).join(" ")) // concatenate mentions with a space
-            } else {
-                toMention = '@' + status.account.acct
             }
             console.log('replying')
             mastoapi.postStatus( toMention + ' ' + await posts.getRandomPost(), 'reply',status.visibility, status.id) //reply with random post and mentions
