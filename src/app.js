@@ -10,12 +10,14 @@ console.log('💬 postodon is running!')
 async function replyWithPrompt() {
     const notifications = await mastoapi.getNotifications(5) // get the last five notifications
 
-    let toReply = notifications.filter(function(status) { //Adds notification to be replied to if below is true
-        if (status.content.includes(` ${command}`) && repliedTo.some(i => i.id.includes(status.id)) === false){
-            return true // check if notification content contains the set command and has not been replied to
-        }
-    })
+    
     try {
+        if (!notifications) throw "No notifications found, moving on..."
+        let toReply = notifications.filter(function(status) { //Adds notification to be replied to if below is true
+            if (status.content.includes(` ${command}`) && repliedTo.some(i => i.id.includes(status.id)) === false){
+                return true // check if notification content contains the set command and has not been replied to
+            }
+        })
         await toReply.map(async function(status) { // for each toReply status, execute below
             let toMention
             if (status.mentions) { // Mention anyone
@@ -29,7 +31,7 @@ async function replyWithPrompt() {
         })
         repliedTo = repliedTo.concat(toReply) // add status to list of already replied to statuses
     } catch(err) {
-        throw err
+        console.log(err)
     }
 }
 
