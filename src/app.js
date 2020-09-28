@@ -43,12 +43,15 @@ async function replyWithPrompt() {
 async function postStatus() { // post a random post
     const randomPost = await posts.getRandomPost()
     const post = await mastoapi.postStatus((randomPost), 'post', 'public')
-    console.log(`${new Date} - Posted - ${randomPost}`)
+    fs.appendFile('postodon.log',`${new Date} - Posted - "${randomPost}\n`, function(err){
+        if(err) console.log(err)
+        console.log(`${new Date} - Posted - "${randomPost}"`)
+        
+    })
     return post
 }
 
-
-// mastoapi.clearNotifications()
+mastoapi.clearNotifications()
 let repliedTo = []
 setInterval(() => {replyWithPrompt()},replyInterval) //check for commands every 5 seconds
 setInterval(() => {postStatus()},interval) // post once a day
