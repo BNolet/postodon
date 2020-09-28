@@ -42,7 +42,7 @@ module.exports =
     },
 
     async getNotifications(limit) {
-        const notifications = await axios({
+        return axios({
             method: 'get',
             url: `https://${url}/api/v1/notifications`,
             headers: { 
@@ -58,7 +58,6 @@ module.exports =
             response = response.map(x => x.status)
             return response
         }).catch(err => errorLogger(err))
-        return notifications
     },
 
     async postStatus(content, mode, visibility, replyToId) {
