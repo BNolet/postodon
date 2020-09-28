@@ -1,6 +1,7 @@
 require('dotenv').config()
 const posts = require('./tools/posts')
 const mastoapi = require('./tools/mastoapi.js')
+const fs = require('fs')
 const command = process.env.COMMAND || "/post"
 const interval = process.env.INTERVAL || 86400000
 const replyInterval = process.env.REPLY_INTERVAL || 5000
@@ -9,7 +10,6 @@ console.log('💬 postodon is running!')
 
 async function replyWithPrompt() {
     const notifications = await mastoapi.getNotifications(5) // get the last five notifications
-
     
     try {
         if (!notifications) throw "No notifications found, moving on..."
@@ -26,8 +26,13 @@ async function replyWithPrompt() {
             } else {
                 toMention = '@' + status.account.acct
             }
-            console.log('replying')
-            mastoapi.postStatus( toMention + ' ' + await posts.getRandomPost(), 'reply',status.visibility, status.id) //reply with random post and mentions
+            const randomPost = await posts.getRandomPost()
+            mastoapi.postStatus( toMention + ' ' + randomPost, 'reply',status.visibility, status.id) //reply with random post and mentions
+            fs.appendFile('postodon.log',`${new Date} - Replied - "${toMention} ${randomPost}"\n`, function(err){
+                if(err) console.log(err)
+                console.log(`${new Date} - Replied - "${toMention} ${randomPost}"`)
+                
+            })
         })
         repliedTo = repliedTo.concat(toReply) // add status to list of already replied to statuses
     } catch(err) {
@@ -36,13 +41,14 @@ async function replyWithPrompt() {
 }
 
 async function postStatus() { // post a random post
-    const post = await mastoapi.postStatus((await posts.getRandomPost()), 'post', 'public')
-    console.log('posting')
+    const randomPost = await posts.getRandomPost()
+    const post = await mastoapi.postStatus((randomPost), 'post', 'public')
+    console.log(`${new Date} - Posted - ${randomPost}`)
     return post
 }
 
 
-mastoapi.clearNotifications()
+// mastoapi.clearNotifications()
 let repliedTo = []
 setInterval(() => {replyWithPrompt()},replyInterval) //check for commands every 5 seconds
 setInterval(() => {postStatus()},interval) // post once a day

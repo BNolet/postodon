@@ -1,5 +1,6 @@
 const axios = require('axios').default
 const uuidv4 = require('uuid').v4
+const { Console } = require('console')
 const fs = require('fs')
 const url = process.env.INSTANCE_URL
 const token = process.env.ACCESS_TOKEN
@@ -41,7 +42,7 @@ module.exports =
     },
 
     async getNotifications(limit) {
-        axios({
+        const notifications = await axios({
             method: 'get',
             url: `https://${url}/api/v1/notifications`,
             headers: { 
@@ -50,18 +51,14 @@ module.exports =
             data: {
                 limit: limit
             }
-        }).then(function(notifications){        
-            try {
-                notifications = notifications.data.filter(function(notif) {
-                    return notif.type === "mention"
-                })
-                notifications = notifications.map(x => x.status)
-            } catch(err) {
-                console.log(err)
-            }
-
-            return notifications
+        }).then(response => {        
+            response = response.data.filter(function(notif) {
+                return notif.type === "mention"
+            })
+            response = response.map(x => x.status)
+            return response
         }).catch(err => errorLogger(err))
+        return notifications
     },
 
     async postStatus(content, mode, visibility, replyToId) {
