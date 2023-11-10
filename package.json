@@ -13,7 +13,7 @@
   "author": "Brandon 'LinuxLiaison' Nolet",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "dotenv": "^8.2.0",
     "uuid": "^8.3.0"
   }
