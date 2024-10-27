@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Postodon: Connect Mastodon account{% endblock %}
+
+{% block content %}
+<div class="row row-cols-3">
+    <div class="col"></div>
+    <div class="col">
+        <form id="mastodonForm" action="/add_social" method="GET">
+            <div class="mb-3">
+                <label for="domain" class="form-label">Mastodon instance domain</label>
+                <input name="domain" type="text" class="form-control" id="domain">
+            </div>
+            <button type="submit" class="btn btn-primary">Connect with Mastodon</button>
+          </form>
+    </div>
+    <div class="col"></div>
+</div>
+
+<script>
+    document.getElementById('mastodonForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        var domain = document.getElementById('domain').value;
+        if (domain) {
+            this.action = '/add_social/' + encodeURIComponent(domain);
+        }
+    
+        this.submit(); // Submit the form with the updated action URL
+    });
+</script>
+
+{% endblock %}

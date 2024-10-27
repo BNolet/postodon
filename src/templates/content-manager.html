@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Scheduler {% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4"><u>Queue</u></h1>
+<div class="container">
+    <!-- <div class="row mb-3">
+        <div class="col"></div>
+        <div class="col d-flex justify-content-center">
+            <select id="scheduled_post_filter" class="form-select" style="width:150px;" aria-label="Filter scheduled posts">
+                <option selected>Filter</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="recurring">Reccurring</option>
+                <option value="all">All</option>
+              </select>
+        </div>
+        <div class="col"></div>
+    </div> -->
+    <div class="row">
+        <div class="col"></div> <!-- Empty left column -->
+        
+        <div class="col-9">
+            <div class="row"> <!-- New row to hold cards -->
+                {% for post in posts %}
+                <div class="col-md-4 mb-2"> <!-- Using col-md-4 for better card layout -->
+                    <div data-recurring="{{ 'true' if post.recurring else '' }}" class="card post" style="width:18rem">
+                        <div class="card-body">
+                            <p class="card-text">{{ post.content }}</p>
+                            <a onclick="deletePost('{{ post.id }}')" class="btn btn-danger">Remove</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="col"></div> <!-- Empty right column -->
+    </div>
+</div>
+
+    <button id="postButton">Post to Mastodon</button>
+
+    <script>
+        const postButton = document.getElementById('postButton');
+
+        postButton.addEventListener('click', function() {
+            // Make a POST request to the Flask backend
+            fetch('/post-to-mastodon', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Successfully posted to Mastodon!');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('Failed to post to Mastodon: ' + error.message);
+            });
+        });
+    </script>
+
+
+{% endblock %}

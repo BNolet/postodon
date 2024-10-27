@@ -1,0 +1,14 @@
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link {% if current_page == 'home'%}active{% endif %}" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if current_page == 'scheduler'%}active{% endif %}" href="/scheduler">Scheduler</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if current_page == 'content-manager'%}active{% endif %}" href="/content-manager">Manage Content</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout" tabindex="-1" aria-disabled="false">{{loginout}}</a>
+    </li>
+  </ul>

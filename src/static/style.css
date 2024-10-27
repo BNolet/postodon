@@ -1,0 +1,65 @@
+.nav {
+    background-color: #37B7C3 !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    margin-bottom: 20px !important;
+}
+
+.nav a {
+    color:#EBF4F6;
+}
+
+.nav-link.disabled {
+    color: #088395 !important;
+}
+
+.nav-link.active {
+    color:#071952;
+}
+
+.row > .col:first-child {
+    padding-left:0;
+}
+
+.row > .col:last-child {
+    padding-right:0;
+}
+
+.your-posts-widget {
+    max-height: 800px;
+    overflow-y: auto;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.card {
+    border-radius: 10px !important;
+}
+
+.btn-primary {
+    background-color: #05668d !important;
+}
+
+.btn-danger {
+    background-color: #982649 !important;
+}
+
+#page-container {
+    position:relative;
+    min-height: 97vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    padding-top: 2.5rem;
+    margin: auto;
+    text-align: center;
+}

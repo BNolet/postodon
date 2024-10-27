@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+        <h1>Your recent posts:</h1>
+        <div class="your-posts-widget">
+            <ul class="list-group">
+                {% for post in posts %}
+                <li class="list-group-item">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{post.poster}}</div>
+                        <blockquote class="blockquote">
+                            {{post.content|safe}}
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            {{post.posted_time}}
+                        </figcaption>
+                      </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
+
+{% endblock %}
