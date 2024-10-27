@@ -56,6 +56,7 @@ flask_secret_key="MYSUPERSECRETKEY"
 domain="127.0.0.1"
 port=5001
 env=debug
+interval=86400
 ```
 
 ## Running via Python
