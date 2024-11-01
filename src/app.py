@@ -12,7 +12,11 @@ load_dotenv()
 
 app.secret_key = os.getenv("flask_secret_key")
 
-interval = int(os.getenv("interval")) or 86400 # 24 hours
+try:
+    interval = int(os.getenv("interval"))
+except TypeError:
+    print("Interval not set in environment, defaulting to 86400 seconds (24 hours)")
+    interval = 86400
 
 template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),'templates'))
 app.template_folder = template_dir
