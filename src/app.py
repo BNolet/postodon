@@ -18,6 +18,12 @@ except TypeError:
     print("Interval not set in environment, defaulting to 86400 seconds (24 hours)")
     interval = 86400
 
+try:
+    port = int(os.getenv("port"))
+except TypeError:
+    print("Port not set in environment, defaulting to 5001")
+    port = 5001
+
 template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),'templates'))
 app.template_folder = template_dir
 static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),'static'))
@@ -33,4 +39,4 @@ if os.getenv("env") == "debug":
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=port)
