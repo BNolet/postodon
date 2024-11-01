@@ -8,8 +8,9 @@ from .db import DB
 from .models import *
 from .mastodon import post_random_to_mastodon
 
-base_url = os.getenv('domain') or '127.0.0.1'
+base_url = os.getenv('base_url') or '127.0.0.1'
 port = os.getenv('port') or 5001
+external_domain = os.getenv('external_domain') or f"{base_url}:{port}"
 
 app = Flask(__name__)
 
@@ -80,7 +81,7 @@ def redirect_to_mastodon(instance_domain):
         print('REGISTERING APP')
         response = requests.post(f'https://{instance_domain}/api/v1/apps', data={
             'client_name': 'Postodon',
-            'redirect_uris': f'http://{base_url}:{port}/add_social/{instance_domain}/callback',
+            'redirect_uris': f'http://{external_domain}/add_social/{instance_domain}/callback',
             'scopes': 'read write',
             'website': 'https://postodon.org'
         })
@@ -100,7 +101,7 @@ def redirect_to_mastodon(instance_domain):
     oauth_params = {
         'client_id': instance.client_id,
         'response_type': 'code',
-        'redirect_uri': f'http://{base_url}:{port}/add_social/{instance_domain}/callback',
+        'redirect_uri': f'http://{external_domain}/add_social/{instance_domain}/callback',
         'scope': 'read write'
     }    
     oauth_url = f'https://{instance_domain}/oauth/authorize?' + urlencode(oauth_params)
@@ -120,7 +121,7 @@ def add_social(instance_domain):
         token_response = requests.post(f'https://{instance_domain}/oauth/token', data={
             'grant_type': 'authorization_code',
             'code': code,
-            'redirect_uri': f'http://{base_url}:{port}/add_social/{instance_domain}/callback',
+            'redirect_uri': f'http://{external_domain}/add_social/{instance_domain}/callback',
             'client_id': instance.client_id,
             'client_secret': instance.client_secret,
             'scope': 'read write'

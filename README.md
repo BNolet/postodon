@@ -55,6 +55,7 @@ Set up your `.env` file with the following values:
 flask_secret_key="MYSUPERSECRETKEY"
 domain="127.0.0.1"
 port=5001
+external_domain=example.com
 env=debug
 interval=86400
 ```
@@ -73,7 +74,7 @@ interval=86400
 
 # Production
 
-This project is still in a very basic alpha phase. There *will* be pitfalls and errors and things *will* break. 
+This project is still in a very basic alpha phase. There *will* be pitfalls and errors and things *will* break, especially upon update. 
 
 # Colour palette
 
