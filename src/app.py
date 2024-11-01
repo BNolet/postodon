@@ -1,4 +1,5 @@
 import os
+os.makedirs("database", exist_ok=True)
 
 from dotenv import load_dotenv
 from apscheduler.schedulers.background import BackgroundScheduler

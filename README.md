@@ -67,7 +67,9 @@ interval=86400
 
 1. `docker build -t postodon:latest .`
 
-2. `docker run -p 5001:5001 --env-file ./.env postodon:latest`
+2. `docker volume create postodon-database`
+
+2. `docker run -p 5001:5001 --env-file ./.env -v postodon-database:/app/database postodon:latest`
 
 # Production
 

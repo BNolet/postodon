@@ -8,7 +8,7 @@ from sqlalchemy import select, exists, create_engine
 
 class DB():
     def __init__(self,):
-        self.engine = create_engine('sqlite:///example.db', echo=True)
+        self.engine = create_engine('sqlite:///database/postodon.db', echo=True)
         Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine)
         self.session = self.Session()
